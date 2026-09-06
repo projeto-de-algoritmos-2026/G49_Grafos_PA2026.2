@@ -1,6 +1,6 @@
 # 🎬 GrafoFlix: Sistema Híbrido de Recomendação de Filmes e Séries
 
-Este projeto consiste num *Motor de Recomendação* desenvolvido para a disciplina de *Algoritmos e Estruturas de Dados II*.
+Este projeto consiste num *Motor de Recomendação* desenvolvido como trabalho final para a disciplina de *Projeto de Algoritmos*, do professor *Mauricio Serrano*.
 
 O sistema utiliza uma abordagem *híbrida, combinando **Processamento de Linguagem Natural (PLN)* e *Teoria dos Grafos* para sugerir conteúdos de forma *semântica e colaborativa*.
 
@@ -50,17 +50,18 @@ Modela as interações (*arestas) entre o conjunto de **Utilizadores* e o conjun
 
 Ordena os filmes pelo seu grau de centralidade no *Grafo Ponderado* em tempo *O(log n), alimentando a vitrine de **Destaques* de forma eficiente.
 
+#### Estrutura 4 — Árvore Geradora via Algoritmo de Prim (Futura Estrutura)
+
+Adição planejada para o trabalho de *Projeto de Algoritmos*: uma Árvore Geradora, construída com o Algoritmo de Prim, sobre o próprio Grafo Ponderado de Similaridade (Estrutura 1). Ela conecta todos os filmes pelas ligações de maior similaridade textual entre si, sem ciclos, formando trilhas de descoberta de conteúdos parecidos.
+
 ---
 
 ## 👥 Integrantes do Grupo
 
 | Integrante                       | GitHub                                         | Contribuição |
 | -------------------------------- | ---------------------------------------------- | ------------ |
-| Arthur Mendes Borges             | [@artmendess](https://github.com/artmendess)   | Participação na definição e construção da estrutura do projeto, organização da arquitetura da solução e apoio na elaboração dos slides.          |
-| Davi Marques do Egito Coelho     | [@daviegito](https://github.com/daviegito)     | Participação na definição e construção da estrutura do projeto, organização da arquitetura da solução e apoio na elaboração da documentação técnica.          |
-| João Victor Mello da Costa Bruno | [@Chaotzuu](https://github.com/Chaotzuu)       | Participação na definição e construção da estrutura do projeto, organização da arquitetura da solução e apoio na elaboração da documentação técnica.         |
-| Jorge Henrique Lessa de Oliveira | [@SirJorgito](https://github.com/SirJorgito)   | Participação na definição e construção da estrutura do projeto, organização da arquitetura da solução e apoio na elaboração dos slides.          |
 | Samuel Rodrigues Viana Lobo      | [@Samuelvlobo](https://github.com/Samuelvlobo) | Participação na definição e construção da estrutura do projeto, organização da arquitetura da solução e apoio na elaboração da documentação técnica.          |
+| Gabriel Sampaio Fae              | [@Faehzin](https://github.com/Faehzin)         | Adaptação do projeto para a disciplina de Projeto de Algoritmos e desenvolvimento da Estrutura 4 (Árvore Geradora via Algoritmo de Prim).          |
 
 ---
 
