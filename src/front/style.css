@@ -1,0 +1,234 @@
+/* style.css - Design escuro e moderno (fundo #141414, textos claros, detalhes em vermelho) */
+
+:root {
+    --bg-color: #141414;
+    --text-color: #e5e5e5;
+    --accent-color: #e50914; /* Vermelho inspirado na Netflix */
+    --card-bg: #2f2f2f; /* Fundo cinza escuro para os cards */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+h1 {
+    color: var(--accent-color);
+    font-size: 2.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+#login-container {
+    display: flex;
+    gap: 10px;
+}
+
+input {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #333;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+}
+
+input:focus {
+    background-color: #444;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #f40612;
+}
+
+.hidden {
+    display: none !important;
+}
+
+main {
+    padding: 20px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: #e5e5e5;
+    margin-bottom: 0.5em;
+    font-weight: 500;
+}
+
+.subtitle {
+    font-size: 0.8rem;
+    color: #808080;
+    font-weight: normal;
+    margin-left: 10px;
+}
+
+/* Fileiras horizontais com scroll */
+.carousel {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding-top: 20px;
+    padding-bottom: 15px;
+    scroll-behavior: smooth;
+}
+
+/* Estilo moderno para a barra de rolagem horizontal */
+.carousel::-webkit-scrollbar {
+    height: 8px;
+}
+.carousel::-webkit-scrollbar-track {
+    background: #1a1a1a;
+    border-radius: 4px;
+}
+.carousel::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 4px;
+}
+.carousel::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
+}
+
+/* Cards organizados em fileiras horizontais com fundo cinza escuro */
+.card {
+    flex: 0 0 auto;
+    min-width: 200px;
+    min-height: 220px;
+    height: auto;
+    background-color: var(--card-bg);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    user-select: none;
+    color: #fff;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+/* Botão Específico de Ação */
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.tag {
+    font-size: 0.7rem;
+    background-color: #111;
+    color: #ccc;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-weight: normal;
+}
+.btn-assisti {
+    margin-top: 10px;
+    padding: 8px 15px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn-assisti:hover:not(:disabled) {
+    background-color: #f40612;
+    transform: scale(1.05);
+}
+
+.btn-remover {
+    background-color: #555;
+}
+
+.btn-remover:hover:not(:disabled) {
+    background-color: #777;
+}
+
+.search-section {
+    margin-bottom: 20px;
+}
+
+#searchBar {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    background-color: #222;
+    color: #fff;
+    border: 1px solid #444;
+}
+
+#searchBar:focus {
+    border-color: var(--accent-color);
+    outline: none;
+}
+
+/* Efeito de hover geral no card (crescer levemente) */
+.card:hover {
+    transform: scale(1.08); /* Efeito crescer levemente */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    z-index: 10;
+}
+
+.info-msg {
+    color: #808080;
+    font-style: italic;
+    font-size: 1.1rem;
+    padding: 20px;
+    border: 1px dashed #555;
+    border-radius: 4px;
+    width: 100%;
+    text-align: center;
+}

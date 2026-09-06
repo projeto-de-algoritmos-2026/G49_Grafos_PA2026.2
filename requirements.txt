@@ -1,0 +1,10 @@
+click==8.4.1
+joblib==1.5.3
+nltk==3.9.4
+numpy==2.4.6
+pandas==3.0.3
+python-dateutil==2.9.0.post0
+rake-nltk==1.0.6
+regex==2026.5.9
+six==1.17.0
+tqdm==4.68.3

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrafoFlix</title>
+    <!-- Link explícito para o arquivo CSS local na mesma pasta -->
+    <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+    <header>
+        <h1>GrafoFlix</h1>
+        <div id="login-container">
+            <input type="text" id="user-id" placeholder="Digite seu ID de Usuário">
+            <button id="login-btn">Entrar</button>
+        </div>
+        <div id="user-info" class="hidden">
+            <span id="welcome-message"></span>
+            <button id="logout-btn">Sair</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="row search-section">
+            <input type="text" id="searchBar" placeholder="Pesquisar um filme...">
+        </section>
+
+        <section class="row">
+            <h2>Em Destaque (Mais Conectados) <span class="subtitle">Estrutura: Max-Heap ordenado por Centralidade do Grafo de PLN</span></h2>
+            <div class="carousel" id="row-popular">
+                <!-- Cards populados pelo JS -->
+            </div>
+        </section>
+
+        <section class="row hidden auth-required" id="section-connected">
+            <h2>Filmes Conectados <span class="subtitle">Estrutura: Projeção de Filtragem Colaborativa (Grafo Bipartido)</span></h2>
+            <div class="carousel" id="row-connected">
+                <p id="instruction-msg" class="info-msg">Clique em algum filme popular acima para vermos o que os usuários com gosto parecido estão assistindo.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Script explícito para o arquivo JS local na mesma pasta -->
+    <script src="./app.js"></script>
+</body>
+</html>
