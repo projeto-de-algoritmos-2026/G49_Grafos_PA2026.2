@@ -92,3 +92,90 @@ class MaxHeap:
     def tamanho(self):
         """Complexidade O(1)"""
         return len(self.heap)
+
+
+class MaxHeapArestas:
+    """
+    Fila de prioridade (Max-Heap) especializada em arestas de um grafo.
+    Mesma lógica do MaxHeap acima, mas a chave de ordenação é o campo
+    'peso' de cada elemento (e não 'popularidade'). É a estrutura usada
+    pelo Algoritmo de Prim para sempre escolher, na borda da árvore em
+    construção, a aresta de maior peso disponível.
+    """
+    def __init__(self):
+        self.heap = []
+
+    def _pai(self, indice):
+        """Retorna o índice do nó pai."""
+        return (indice - 1) // 2
+
+    def _filho_esquerdo(self, indice):
+        """Retorna o índice do filho esquerdo."""
+        return 2 * indice + 1
+
+    def _filho_direito(self, indice):
+        """Retorna o índice do filho direito."""
+        return 2 * indice + 2
+
+    def _swap(self, i, j):
+        """Troca dois elementos de posição no array. Operação O(1)."""
+        self.heap[i], self.heap[j] = self.heap[j], self.heap[i]
+
+    def _subir(self, indice):
+        """
+        Heapify-Up: Restaura a propriedade do Max-Heap subindo o elemento.
+        Complexidade: O(log n).
+        """
+        while indice > 0 and self.heap[indice]['peso'] > self.heap[self._pai(indice)]['peso']:
+            pai_idx = self._pai(indice)
+            self._swap(indice, pai_idx)
+            indice = pai_idx
+
+    def _descer(self, indice):
+        """
+        Heapify-Down: Restaura a propriedade do Max-Heap descendo o elemento raiz.
+        Complexidade: O(log n).
+        """
+        maior = indice
+        esq = self._filho_esquerdo(indice)
+        dir_ = self._filho_direito(indice)
+        tamanho = len(self.heap)
+
+        if esq < tamanho and self.heap[esq]['peso'] > self.heap[maior]['peso']:
+            maior = esq
+
+        if dir_ < tamanho and self.heap[dir_]['peso'] > self.heap[maior]['peso']:
+            maior = dir_
+
+        if maior != indice:
+            self._swap(indice, maior)
+            self._descer(maior)
+
+    def inserir(self, elemento):
+        """
+        Insere uma nova aresta (dict com 'peso', 'de' e 'para') no heap.
+        Complexidade: O(log n).
+        """
+        self.heap.append(elemento)
+        self._subir(len(self.heap) - 1)
+
+    def extrair_max(self):
+        """
+        Remove e retorna a aresta de maior peso (raiz).
+        Complexidade: O(log n).
+        """
+        if not self.heap:
+            return None
+
+        if len(self.heap) == 1:
+            return self.heap.pop()
+
+        maximo = self.heap[0]
+        self.heap[0] = self.heap.pop()
+        self._descer(0)
+
+        return maximo
+
+    def tamanho(self):
+        """Complexidade O(1)"""
+        return len(self.heap)

@@ -6,6 +6,9 @@ Este grafo separa logicamente utilizadores e filmes e é armazenado
 por meio de Lista de Adjacência utilizando dicionários do Python.
 """
 
+from meu_heap import MaxHeapArestas
+
+
 class GrafoBipartido:
     def __init__(self):
         # Listas de adjacência separadas para clareza didática.
@@ -162,3 +165,49 @@ class GrafoSimilaridadeTextual:
         for id_filme, vizinhos in self.adjacencia.items():
             pesos[id_filme] = sum(vizinhos.values())
         return pesos
+
+    def gerar_arvore_geradora(self, origem=None):
+        """
+        Algoritmo de Prim (variante Árvore Geradora MÁXIMA).
+
+        Constrói uma árvore que conecta todos os filmes alcançáveis a
+        partir de 'origem', escolhendo a cada passo a aresta de MAIOR
+        peso (maior similaridade) que liga a árvore já construída a um
+        filme ainda fora dela. O resultado não tem ciclos e representa
+        a espinha dorsal de maior similaridade textual entre os filmes.
+
+        Retorna uma lista de tuplas (id_de, id_para, peso), na ordem em
+        que cada filme entrou na árvore. Se o grafo for desconexo, cobre
+        apenas o componente alcançável a partir de 'origem'.
+
+        Complexidade: O(E log E), pois cada aresta pode ser inserida na
+        fila de prioridade a partir de cada uma das suas duas pontas.
+        """
+        if not self.adjacencia:
+            return []
+
+        vertices = list(self.adjacencia.keys())
+        if origem is None or origem not in self.adjacencia:
+            origem = vertices[0]
+
+        visitados = {origem}
+        arvore = []
+        borda = MaxHeapArestas()
+
+        for vizinho, peso in self.adjacencia[origem].items():
+            borda.inserir({'peso': peso, 'de': origem, 'para': vizinho})
+
+        while borda.tamanho() > 0 and len(visitados) < len(vertices):
+            aresta = borda.extrair_max()
+
+            if aresta['para'] in visitados:
+                continue  # aresta obsoleta: a outra ponta já entrou na árvore por outro caminho
+
+            visitados.add(aresta['para'])
+            arvore.append((aresta['de'], aresta['para'], aresta['peso']))
+
+            for vizinho, peso in self.adjacencia[aresta['para']].items():
+                if vizinho not in visitados:
+                    borda.inserir({'peso': peso, 'de': aresta['para'], 'para': vizinho})
+
+        return arvore
