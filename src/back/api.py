@@ -5,6 +5,7 @@
 # ==============================================================================
 
 import os
+import time
 import pandas as pd
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -20,6 +21,8 @@ CORS(app)
 # Instancia as estruturas globais
 heap_populares = MaxHeap()
 grafo_recomendacao = GrafoBipartido()
+grafo_similaridade = GrafoSimilaridadeTextual()
+arvore_similaridade = []  # Lista de (id_de, id_para, peso), calculada uma vez no boot (Algoritmo de Prim)
 meta_keywords = {} # Cache global para NLP e Frontend
 
 def carregar_dados():
@@ -27,6 +30,8 @@ def carregar_dados():
     Função chamada ao iniciar o servidor para ler os CSVs
     e popular as estruturas de dados na memória RAM.
     """
+    global arvore_similaridade
+
     base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
     data_dir = os.path.join(base_dir, 'data')
     
@@ -50,10 +55,16 @@ def carregar_dados():
             meta_keywords[id_filme] = palavras_chave
 
         print("-> Construindo Grafo de Similaridade Textual (NLP)...")
-        grafo_nlp = GrafoSimilaridadeTextual()
-        grafo_nlp.construir_grafo(dict_keywords)
-        centralidade = grafo_nlp.calcular_centralidade()
-            
+        grafo_similaridade.construir_grafo(dict_keywords)
+        centralidade = grafo_similaridade.calcular_centralidade()
+
+        print("-> Calculando Árvore Geradora (Algoritmo de Prim) sobre o Grafo de Similaridade...")
+        inicio_prim = time.time()
+        arvore_similaridade = grafo_similaridade.gerar_arvore_geradora()
+        duracao_prim = time.time() - inicio_prim
+        print(f"-> Árvore geradora com {len(arvore_similaridade)} arestas "
+              f"sobre {len(grafo_similaridade.adjacencia)} filmes ({duracao_prim:.2f}s).")
+
         for _, row in df_filmes.iterrows():
             id_filme = int(row['id_filme'])
             titulo = row['titulo']
